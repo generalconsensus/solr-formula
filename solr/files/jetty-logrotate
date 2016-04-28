@@ -1,0 +1,11 @@
+/var/log/jetty.log {
+  daily
+  missingok
+  rotate 4
+  compress
+  notifempty
+  create 644 root root
+  postrotate
+    /etc/init.d/jetty restart > /dev/null || true
+  endscript
+}

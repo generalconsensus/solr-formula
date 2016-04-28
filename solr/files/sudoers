@@ -1,0 +1,1 @@
+%{{ salt['pillar.get']('siteuser', 'vagrant') }} ALL=(ALL) NOPASSWD: /etc/init.d/jetty
