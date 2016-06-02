@@ -48,14 +48,16 @@ rsync-solr-configs:
     - names:
       - /usr/bin/rsync -av /opt/solr/example/multicore/core0/ /opt/solr/example/multicore/vagrant/
     - unless: test -d /opt/solr/example/multicore/vagrant
+    - order: 5
 
 rsync-apachesolr-configs:
   cmd.run:
-    - onchanges: 
-      - file: /opt/solr/example/multicore/vagrant/conf/schema.xml
+#    - onchanges: 
+#      - file: /opt/solr/example/multicore/vagrant/conf/schema.xml
     - names:
       - /usr/bin/rsync -av /opt/apachesolr/solr-conf/solr-4.x/ /opt/solr/example/multicore/vagrant/conf/
-#    - unless: test -d /opt/solr/example/multicore/vagrant/conf
+    - unless: test -d /opt/solr/example/multicore/vagrant/conf
+    - order: 10
 
 # init
 /etc/init.d/jetty:
