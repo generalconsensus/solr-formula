@@ -75,5 +75,5 @@ jetty-service:
     - mode: 440
     - template: jinja
     - context:
-        user: {{ pillar['project'] }}
+        user: {{ salt['pillar.get']('project', 'root') }}
 
