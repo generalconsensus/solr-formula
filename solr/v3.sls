@@ -25,6 +25,23 @@ extract-solr:
   file.symlink:
     - target: /opt/apache-solr-3.6.2
 
+# Get Drupal module
+get-drupal-apachesolr-7.x.1:
+  file.managed:
+    - name: /opt/apachesolr-7.x-1.x-dev.tar.gz
+    - source: http://ftp.drupal.org/files/projects/apachesolr-7.x-1.x-dev.tar.gz
+
+#Extract module
+extract-drupal-apachesolr:
+  cmd:
+    - cwd: /opt
+    - names:
+      - tar xzf apachesolr-7.x-1.x-dev.tar.gz
+    - run
+    - require:
+      - file: apachesolr-7.x-1.x-dev
+    - unless: test -d /opt/apachesolr-7.x-1.x-dev
+
 # init
 /etc/init.d/jetty:
   file.managed:
