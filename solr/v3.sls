@@ -43,6 +43,22 @@ extract-drupal-apachesolr:
 #      - file: apachesolr-7.x-1.x-dev.tar.gz
     - unless: test -d /opt/apachesolr-7.x-1.x-dev
 
+rsync-solr-configs:
+  cmd.run:
+    - names:
+      - /usr/bin/rsync -av /opt/solr/example/multicore/core0/ /opt/solr/example/multicore/vagrant/
+    - unless: test -d /opt/solr/example/multicore/vagrant
+    - order: 5
+
+rsync-apachesolr-configs:
+  cmd.run:
+#    - onchanges: 
+#      - file: /opt/solr/example/multicore/vagrant/conf/schema.xml
+    - names:
+      - /usr/bin/rsync -av /opt/apachesolr/solr-conf/solr-3.x/ /opt/solr/example/multicore/vagrant/conf/
+    - unless: test -d /opt/solr/example/multicore/vagrant/conf
+    - order: 10
+
 /opt/solr/example/multicore/solr.xml:
   file.managed:
     - source: salt://solr/files/solr.xml
