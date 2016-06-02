@@ -39,8 +39,8 @@ extract-drupal-apachesolr:
     - names:
       - tar xzf apachesolr-7.x-1.x-dev.tar.gz
     - run
-    - require:
-      - file: apachesolr-7.x-1.x-dev.tar.gz
+#    - require:
+#      - file: apachesolr-7.x-1.x-dev.tar.gz
     - unless: test -d /opt/apachesolr-7.x-1.x-dev
 
 # init
