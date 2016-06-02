@@ -29,7 +29,7 @@ extract-solr:
 get-drupal-apachesolr-7.x.1:
   file.managed:
     - name: /opt/apachesolr-7.x-1.x-dev.tar.gz
-    - source: http://ftp.drupal.org/files/projects/apachesolr-7.x-1.x-dev.tar.gz
+    - source: https://ftp.drupal.org/files/projects/apachesolr-7.x-1.x-dev.tar.gz
     - source_hash: md5=b6ac413441e1793c59cec11a59b923d8
 
 #Extract module
@@ -40,7 +40,7 @@ extract-drupal-apachesolr:
       - tar xzf apachesolr-7.x-1.x-dev.tar.gz
     - run
     - require:
-      - file: apachesolr-7.x-1.x-dev
+      - file: apachesolr-7.x-1.x-dev.tar.gz
     - unless: test -d /opt/apachesolr-7.x-1.x-dev
 
 # init
