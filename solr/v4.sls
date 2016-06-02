@@ -41,8 +41,14 @@ extract-drupal-apachesolr:
     - run
 #    - require:
 #      - file: apachesolr-7.x-1.x-dev.tar.gz
-    - unless: test -d /opt/apachesolr-7.x-1.x-dev
+    - unless: test -d /opt/apachesolr
 
+rsync-solr-configs:
+  cmd:
+    - names:
+      - /usr/bin/rsync -av /opt/solr/example/multicore/core0/ /opt/solr/example/multicore/vagrant/
+      - /usr/bin/rsync -av /opt/apachesolr/solr-conf/solr-4.x/ /opt/solr/example/multicore/vagrant/conf/
+      
 # init
 /etc/init.d/jetty:
   file.managed:
