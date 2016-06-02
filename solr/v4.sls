@@ -59,6 +59,13 @@ rsync-apachesolr-configs:
     - unless: test -d /opt/solr/example/multicore/vagrant/conf
     - order: 10
 
+/opt/solr/example/multicore/solr.xml:
+  file.managed:
+    - source: salt://solr/files/solr.xml
+    - mode: 644
+    - watch_in:
+      - service: jetty-service
+
 # init
 /etc/init.d/jetty:
   file.managed:
@@ -83,3 +90,4 @@ jetty-service:
   file.managed:
     - source: salt://solr/files/jetty-logrotate
     - mode: 744
+

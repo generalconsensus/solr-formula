@@ -43,6 +43,13 @@ extract-drupal-apachesolr:
 #      - file: apachesolr-7.x-1.x-dev.tar.gz
     - unless: test -d /opt/apachesolr-7.x-1.x-dev
 
+/opt/solr/example/multicore/solr.xml:
+  file.managed:
+    - source: salt://solr/files/solr.xml
+    - mode: 644
+    - watch_in:
+      - service: jetty-service
+
 # init
 /etc/init.d/jetty:
   file.managed:
