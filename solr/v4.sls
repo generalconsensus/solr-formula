@@ -46,10 +46,16 @@ extract-drupal-apachesolr:
 rsync-solr-configs:
   cmd.run:
     - names:
-      - /usr/bin/rsync -av /opt/apachesolr/solr-conf/solr-4.x/ /opt/solr/example/multicore/vagrant/conf/
       - /usr/bin/rsync -av /opt/solr/example/multicore/core0/ /opt/solr/example/multicore/vagrant/
     - unless: test -d /opt/solr/example/multicore/vagrant
-    
+
+rsync-apachesolr-configs:
+  cmd.run:
+    - onchanges: rsync-solr-configs
+    - names:
+      - /usr/bin/rsync -av /opt/apachesolr/solr-conf/solr-4.x/ /opt/solr/example/multicore/vagrant/conf/
+    - unless: test -d /opt/solr/example/multicore/vagrant
+
 # init
 /etc/init.d/jetty:
   file.managed:
