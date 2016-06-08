@@ -8,6 +8,8 @@ solr-4.10.4:
     - name: /opt/solr-4.10.4.tgz
     - source: http://archive.apache.org/dist/lucene/solr/4.10.4/solr-4.10.4.tgz
     - source_hash: md5=8ae107a760b3fc1ec7358a303886ca06
+    - onlyif:
+      - [ ! -f /opt/solr-4.10.4.tgz ]
 
 # Extract it
 extract-solr:
