@@ -25,37 +25,10 @@ extract-solr:
   file.symlink:
     - target: /opt/apache-solr-3.6.2
 
-# Get Drupal module
-get-drupal-apachesolr-7.x.1:
-  file.managed:
-    - name: /opt/apachesolr-7.x-1.x-dev.tar.gz
-    - source: https://ftp.drupal.org/files/projects/apachesolr-7.x-1.x-dev.tar.gz
-    - source_hash: md5=b6ac413441e1793c59cec11a59b923d8
-
-#Extract module
-extract-drupal-apachesolr:
-  cmd:
-    - cwd: /opt
-    - names:
-      - tar xzf apachesolr-7.x-1.x-dev.tar.gz
-    - run
-#    - require:
-#      - file: apachesolr-7.x-1.x-dev.tar.gz
-    - unless: test -d /opt/apachesolr-7.x-1.x-dev
-
-rsync-solr-configs:
-  cmd.run:
-    - names:
-      - /usr/bin/rsync -av /opt/solr/example/multicore/core0/ /opt/solr/example/multicore/vagrant/
-    - unless: test -d /opt/solr/example/multicore/vagrant
-
-rsync-apachesolr-configs:
-  cmd.run:
-#    - onchanges: 
-#      - file: /opt/solr/example/multicore/vagrant/conf/schema.xml
-    - names:
-      - /usr/bin/rsync -av /opt/apachesolr/solr-conf/solr-3.x/ /opt/solr/example/multicore/vagrant/conf/
-    - unless: test -d /opt/solr/example/multicore/vagrant/conf
+/opt/solr/example/multicore/vagrant:
+  file.recurse:
+    - source: {{ salt['pillar.get']('solr:conf', 'salt://solr/files/v3') }}
+    - user: root
 
 /opt/solr/example/multicore/solr.xml:
   file.managed:
