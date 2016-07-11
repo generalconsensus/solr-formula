@@ -8,6 +8,7 @@ solr-4.10.4:
     - name: /opt/solr-4.10.4.tgz
     - source: http://archive.apache.org/dist/lucene/solr/4.10.4/solr-4.10.4.tgz
     - source_hash: md5=8ae107a760b3fc1ec7358a303886ca06
+    - unless: test -f /opt/solr-4.10.4.tgz
 
 # Extract it
 extract-solr:
@@ -31,6 +32,7 @@ get-drupal-apachesolr-7.x.1:
     - name: /opt/apachesolr-7.x-1.x-dev.tar.gz
     - source: https://ftp.drupal.org/files/projects/apachesolr-7.x-1.x-dev.tar.gz
     - source_hash: md5=b6ac413441e1793c59cec11a59b923d8
+    - unless: test -f /opt/apachesolr-7.x-1.x-dev.tar.gz
 
 #Extract module
 extract-drupal-apachesolr:
@@ -48,7 +50,6 @@ rsync-solr-configs:
     - names:
       - /usr/bin/rsync -av /opt/solr/example/multicore/core0/ /opt/solr/example/multicore/vagrant/
     - unless: test -d /opt/solr/example/multicore/vagrant
-    - order: 5
 
 rsync-apachesolr-configs:
   cmd.run:
@@ -57,7 +58,6 @@ rsync-apachesolr-configs:
     - names:
       - /usr/bin/rsync -av /opt/apachesolr/solr-conf/solr-4.x/ /opt/solr/example/multicore/vagrant/conf/
     - unless: test -d /opt/solr/example/multicore/vagrant/conf
-    - order: 10
 
 /opt/solr/example/multicore/solr.xml:
   file.managed:
