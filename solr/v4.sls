@@ -1,7 +1,3 @@
-# Make sure we've got java
-java-1.6.0-openjdk:
-  pkg.installed
-
 # Get solr
 solr-4.10.4:
   file.managed:
