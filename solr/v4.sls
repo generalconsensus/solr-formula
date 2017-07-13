@@ -39,6 +39,9 @@ extract-solr:
   file.managed:
     - source: salt://solr/files/jetty-init
     - mode: 744
+    - context:
+        port: {{ salt['pillar.get']('solr:port', '8983') }}
+
 
 /sbin/chkconfig --add jetty:
   cmd.run:
