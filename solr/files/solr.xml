@@ -28,10 +28,16 @@
   adminPath: RequestHandler path to manage cores.  
     If 'null' (or absent), cores will not be manageable via request handler
   -->
-  <cores adminPath="/admin/cores" host="${host:}" hostPort="${jetty.port:8983}" hostContext="${hostContext:solr}">
+  <cores adminPath="/admin/cores" host="${host:}" hostPort="${{ salt['pillar.get']('solr:port', '8983') }}" hostContext="${hostContext:solr}">
     <core name="core0" instanceDir="core0" />
     <core name="core1" instanceDir="core1" />
+    {% if salt['pillar.get']('solr:cores') is defined %}
+    <core name="core3" instanceDir="core3" />
+    {% elif salt['pillar.get']('siteuser') == "vagrant" %}
     <core name="vagrant" instanceDir="vagrant" />
+    {% else %}
+    <core name="core4" instanceDir="core4" />
+    {% endif %}
     
     <shardHandlerFactory name="shardHandlerFactory" class="HttpShardHandlerFactory">
       <str name="urlScheme">${urlScheme:}</str>
