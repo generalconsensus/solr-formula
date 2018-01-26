@@ -31,6 +31,7 @@
   <cores adminPath="/admin/cores" host="${host:}" hostPort="${jetty.port:8983}" hostContext="${hostContext:solr}">
     <core name="core0" instanceDir="core0" />
     <core name="core1" instanceDir="core1" />
+    <core name="standalone" instanceDir="standalone" />
     <core name="vagrant" instanceDir="vagrant" />
     
     <shardHandlerFactory name="shardHandlerFactory" class="HttpShardHandlerFactory">
