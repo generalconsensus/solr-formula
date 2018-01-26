@@ -23,7 +23,7 @@ extract-solr:
 
 /opt/solr/example/multicore/standalone:
   file.recurse:
-    - source: {{ salt['pillar.get']('solr:conf', 'salt://solr/files/v3') }}
+    - source: salt://solr/files/standalone
     - user: root
     
 /opt/solr/example/multicore/vagrant:
