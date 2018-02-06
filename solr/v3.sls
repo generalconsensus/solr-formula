@@ -21,9 +21,9 @@ extract-solr:
   file.symlink:
     - target: /opt/apache-solr-3.6.2
 
-/opt/solr/example/multicore/standalone:
+/opt/solr/example/multicore/standalone-v3:
   file.recurse:
-    - source: salt://solr/files/standalone
+    - source: salt://solr/files/standalone-v3
     - user: root
     
 /opt/solr/example/multicore/vagrant:

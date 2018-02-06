@@ -22,6 +22,11 @@ extract-solr:
   file.symlink:
     - target: /opt/solr-4.10.4
 
+/opt/solr/example/multicore/standalone-v4:
+  file.recurse:
+    - source: salt://solr/files/standalone-v4
+    - user: root
+
 /opt/solr/example/multicore/vagrant:
   file.recurse:
     - source: {{ salt['pillar.get']('solr:conf', 'salt://solr/files/v4') }}
